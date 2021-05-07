@@ -1,6 +1,6 @@
-# Welcome to your CDK TypeScript project!
+# Welcome to CDK - ECS TypeScript example.
 
-This is a blank project for TypeScript development with CDK.
+This is a project for TypeScript development with CDK that incliudes a basic example usage for ECS with Fargate.
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
