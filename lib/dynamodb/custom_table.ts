@@ -1,6 +1,7 @@
 import * as cdk from '@aws-cdk/core';
 import * as dynamodb from '@aws-cdk/aws-dynamodb';
 import { StreamViewType } from '@aws-cdk/aws-dynamodb';
+import * as sns from '@aws-cdk/aws-sns';
 
 export interface DynamoOptions {
     /**
@@ -25,9 +26,11 @@ export interface DynamoOptions {
  * @link cdk.Construct
  */
 export default class CustomTable extends cdk.Construct {
+    //class variables
     options: DynamoOptions;
     name: string;
-    CustomTable: dynamodb.Table;
+    readonly Table: dynamodb.Table;
+    readonly Topic: sns.Topic;
     backupPlan: string;
 
     tags: cdk.TagManager;
@@ -36,11 +39,13 @@ export default class CustomTable extends cdk.Construct {
    * @param id Id of the cloudformation stack
    * @param props Config variables for the stack creation, based on the environment
    * 
-   * @method constructor Class builder for MiBanco Infrastructure stack. Setups the environment and create the classes for constructors
+   * @method constructor Create the classes for constructors
    * 
   */
     constructor(scope: cdk.Construct, id: string, options: DynamoOptions = {
+        //default value for billing is pay per request
         billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+        //default value for removal policy is retain
         removalPolicy: cdk.RemovalPolicy.RETAIN
     }, prefix: string, backupPlan: string) {
         super(scope, id);
@@ -49,7 +54,12 @@ export default class CustomTable extends cdk.Construct {
         //add a backup plan tag
         this.backupPlan = backupPlan;
 
-        this.CustomTable = new dynamodb.Table(scope, this.name, {
+        //sns 
+        this.Topic = new sns.Topic(this, 'Topic', {
+            displayName: this.name + `_TOPIC`
+        });
+
+        this.Table = new dynamodb.Table(scope, this.name, {
             // It's default but it was used to show the config
             partitionKey: {
                 name: 'MY_CUSTOM_TABLE_ID',
@@ -64,6 +74,8 @@ export default class CustomTable extends cdk.Construct {
 
         cdk.Tags.of(this).add('backup-plan', this.backupPlan);
 
+        new cdk.CfnOutput(this, 'Table-ARN', { value: this.Table.tableArn });
+        new cdk.CfnOutput(this, 'Topic-ARN', { value: this.Topic.topicArn });
 
     }
 }

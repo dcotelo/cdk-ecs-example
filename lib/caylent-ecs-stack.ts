@@ -54,7 +54,6 @@ export class CaylentEcsStack extends cdk.Stack {
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST
     }, prefix, backupTag);
 
-    new cdk.CfnOutput(this, 'Table-ARN', { value: custom_table.CustomTable.tableArn });
 
   }
 }
