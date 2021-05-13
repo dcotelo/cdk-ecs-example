@@ -5,7 +5,7 @@ import '@aws-cdk/assert/jest';
 
 const app = new cdk.App();
 // WHEN
-const stack = new CaylentEcs.CaylentEcsStack(app, 'MyTestStack');
+const stack = new CaylentEcs.CaylentEcsStack(app, 'MyECSTestStack');
 
 /* test('Empty Stack', () => {
 
@@ -42,3 +42,5 @@ test('ECS-Service', () => {
     HealthCheckGracePeriodSeconds: 60
   });
 });
+
+
