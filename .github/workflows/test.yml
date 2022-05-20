@@ -15,13 +15,17 @@ jobs:
 
     steps:
       - uses: actions/setup-node@v2
-      - uses: actions/checkout@master
         with:
           node-version: '14'
-          name: dcotelo/golang-example-app     <-- clone https://github.com/dcotelo/golang-example-app
-          ref: refs/heads/release
 
 
+      - name: Clone Golang app
+        uses: actions/checkout@v2
+        with:
+          repository: dcotelo/golang-example-app
+          path: resources/docs/2.x
+          ref: 2.x
+        
       - name: npm install
         run: |
           npm install
