@@ -3,7 +3,7 @@ name: CDK test
 on:
   push:
     branches:
-      - master
+      - '*' 
 jobs:
   build:
     name: Test CDK code
