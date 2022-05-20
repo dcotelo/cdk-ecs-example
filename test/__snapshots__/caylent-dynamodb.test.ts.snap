@@ -192,6 +192,12 @@ Object {
       "Properties": Object {
         "Port": 80,
         "Protocol": "HTTP",
+        "TargetGroupAttributes": Array [
+          Object {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
         "TargetType": "ip",
         "VpcId": Object {
           "Ref": "MyVpcF9F0CA6F",
@@ -295,7 +301,7 @@ Object {
                   Object {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/aws-cdk/assets:7a64d1f884e011d4979532d1cf94a001eab60d7eaff54f5f483047e8b14a9b6a",
+                  "/aws-cdk/assets:13207ae815e683cbce878efe37ae725a54f99e319cda8f5764bd8fda801c70dd",
                 ],
               ],
             },
