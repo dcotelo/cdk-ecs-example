@@ -41,5 +41,8 @@ jobs:
 
       - name: npm test
         run: |
-          npm test -- -u
+          npm test 
 
+      - name: cdk synth
+        run: |
+          cdk synth
