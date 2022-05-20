@@ -3,7 +3,7 @@ name: storybook publish stage
 on:
   push:
     branches:
-      - *
+      - master
 jobs:
   build:
     name: Test CDK code
@@ -23,7 +23,7 @@ jobs:
       with:
         name: dcotelo/golang-example-app     <-- clone https://github.com/dcotelo/golang-example-app
         ref: refs/heads/release
-        
+
       - name: npm install
         run: |
           npm install
