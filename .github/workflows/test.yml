@@ -1,9 +1,6 @@
 name: CDK test
 
-on:
-  push:
-    branches:
-      - '*' 
+on: [push, pull_request]
 jobs:
   build:
     name: Test CDK code
