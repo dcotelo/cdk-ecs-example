@@ -3,6 +3,19 @@
 exports[`DynamoDB - Snapshot 1`] = `
 Object {
   "Outputs": Object {
+    "MYCUSTOMTABLETableARN3A1A8A02": Object {
+      "Value": Object {
+        "Fn::GetAtt": Array [
+          "DEVMYCUSTOMTABLE0351AA05",
+          "Arn",
+        ],
+      },
+    },
+    "MYCUSTOMTABLETopicARN7FE402CF": Object {
+      "Value": Object {
+        "Ref": "MYCUSTOMTABLETopic652FA786",
+      },
+    },
     "MyFargateServiceLoadBalancerDNS704F6391": Object {
       "Value": Object {
         "Fn::GetAtt": Array [
@@ -24,14 +37,6 @@ Object {
               ],
             },
           ],
-        ],
-      },
-    },
-    "TableARN": Object {
-      "Value": Object {
-        "Fn::GetAtt": Array [
-          "DEVMYCUSTOMTABLE0351AA05",
-          "Arn",
         ],
       },
     },
@@ -63,6 +68,18 @@ Object {
       },
       "Type": "AWS::DynamoDB::Table",
       "UpdateReplacePolicy": "Delete",
+    },
+    "MYCUSTOMTABLETopic652FA786": Object {
+      "Properties": Object {
+        "DisplayName": "DEV_MY_CUSTOM_TABLE_TOPIC",
+        "Tags": Array [
+          Object {
+            "Key": "backup-plan",
+            "Value": "myBackupPlan",
+          },
+        ],
+      },
+      "Type": "AWS::SNS::Topic",
     },
     "MyCluster4C1BA579": Object {
       "Type": "AWS::ECS::Cluster",
@@ -278,7 +295,7 @@ Object {
                   Object {
                     "Ref": "AWS::URLSuffix",
                   },
-                  "/aws-cdk/assets:ed7d2464bf953e3c7c73ed6cc08b5bcc65ced0167278a8ff57578e430d667c0e",
+                  "/aws-cdk/assets:7a64d1f884e011d4979532d1cf94a001eab60d7eaff54f5f483047e8b14a9b6a",
                 ],
               ],
             },

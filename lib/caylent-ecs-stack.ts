@@ -24,7 +24,7 @@ export class CaylentEcsStack extends cdk.Stack {
 
     //create and register image
     const myimage = new DockerImageAsset(this, "golang-example-app", {
-      directory: '../go-example-app/',
+      directory: '../golang-example-app/',
     });
 
 
