@@ -1,4 +1,4 @@
-name: storybook publish stage
+name: CDK test
 
 on:
   push:
