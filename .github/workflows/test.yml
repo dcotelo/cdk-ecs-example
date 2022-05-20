@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: dcotelo/golang-example-app
-          path: /
+          path: golang-example-app/
           ref: main
         
       - name: npm install
