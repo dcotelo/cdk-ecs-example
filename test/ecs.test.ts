@@ -1,11 +1,11 @@
 import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as CaylentEcs from '../lib/caylent-ecs-stack';
+import * as CaylentEcs from '../lib/ecs-stack';
 import '@aws-cdk/assert/jest';
 
 const app = new cdk.App();
 // WHEN
-const stack = new CaylentEcs.CaylentEcsStack(app, 'MyECSTestStack');
+const stack = new CaylentEcs.EcsStack(app, 'MyECSTestStack');
 
 /* test('Empty Stack', () => {
 

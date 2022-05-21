@@ -8,7 +8,7 @@ import CustomTable from './dynamodb/custom_table';
 
 
 
-export class CaylentEcsStack extends cdk.Stack {
+export class EcsStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
