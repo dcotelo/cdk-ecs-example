@@ -2,9 +2,20 @@
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
 import { EcsStack } from '../lib/ecs-stack';
+import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
+
 
 const app = new cdk.App();
-new EcsStack(app, 'EcsStack', {
+
+const ECSStack = new cdk.Stack(app, "MyECSTestStack");
+
+    //create and register image
+    const myCustomImage = new DockerImageAsset(ECSStack, "golang-example-app", {
+      directory: 'golang-example-app/',
+    });
+
+
+new EcsStack(ECSStack, 'EcsStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -18,4 +29,7 @@ new EcsStack(app, 'EcsStack', {
   // env: { account: '123456789012', region: 'us-east-1' },
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+  
+
+  dockerImageProp:myCustomImage
 });

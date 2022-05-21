@@ -7,9 +7,12 @@ import * as dynamodb from "@aws-cdk/aws-dynamodb";
 import CustomTable from './dynamodb/custom_table';
 
 
+interface DockerImageProps extends cdk.StackProps {
+  dockerImageProp: DockerImageAsset,
+}
 
 export class EcsStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: cdk.Construct, id: string, props: DockerImageProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
@@ -18,17 +21,10 @@ export class EcsStack extends cdk.Stack {
     });
 
     const cluster = new ecs.Cluster(this, "MyCluster", {
-      vpc: vpc
+      vpc: vpc,
+      //enable container insights for better observability 
+      containerInsights:true
     });
-
-
-    //create and register image
-    const myimage = new DockerImageAsset(this, "golang-example-app", {
-      directory: 'golang-example-app/',
-    });
-
-
-
 
 
     // Create a load-balanced Fargate service and make it public
@@ -38,7 +34,7 @@ export class EcsStack extends cdk.Stack {
       desiredCount: 6, // Default is 1
       taskImageOptions: {
         //use our own image
-        image: ecs.ContainerImage.fromDockerImageAsset(myimage),
+        image: ecs.ContainerImage.fromDockerImageAsset(props.dockerImageProp),
         containerPort: 3000,
       },
       memoryLimitMiB: 2048, // Default is 512
