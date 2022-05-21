@@ -5,8 +5,7 @@ on:
     branches: [ master ]
     types: [ opened, synchronize, closed ]
   push:
-    branches-ignore:
-      - master
+    branches: [ !master ]
 jobs:
   build:
     name: Test CDK code
