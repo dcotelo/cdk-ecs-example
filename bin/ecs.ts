@@ -7,13 +7,15 @@ import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
 
 const app = new cdk.App();
 
+const ECSStack = new cdk.Stack(app, "MyECSTestStack");
+
     //create and register image
-    const myCustomImage = new DockerImageAsset(app, "golang-example-app", {
+    const myCustomImage = new DockerImageAsset(ECSStack, "golang-example-app", {
       directory: 'golang-example-app/',
     });
 
 
-new EcsStack(app, 'EcsStack', {
+new EcsStack(ECSStack, 'EcsStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
