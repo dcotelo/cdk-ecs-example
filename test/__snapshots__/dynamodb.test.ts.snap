@@ -207,7 +207,7 @@ Object {
     },
     "MyFargateServiceLBSecurityGroup6FBF16F1": Object {
       "Properties": Object {
-        "GroupDescription": "Automatically created Security Group for ELB MyDynamoTestStackMyFargateServiceLB4BB1EC8A",
+        "GroupDescription": "Automatically created Security Group for ELB MyDynamoTestStackMyFargateServiceLB180784C0",
         "SecurityGroupIngress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
@@ -223,7 +223,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "MyFargateServiceLBSecurityGrouptoMyDynamoTestStackMyFargateServiceSecurityGroupF8C32497300025C4D9BF": Object {
+    "MyFargateServiceLBSecurityGrouptoMyDynamoTestStackMyFargateServiceSecurityGroup08D99E023000F3B6A7A7": Object {
       "Properties": Object {
         "Description": "Load balancer to target",
         "DestinationSecurityGroupId": Object {
@@ -246,7 +246,7 @@ Object {
     },
     "MyFargateServiceSecurityGroup7016792A": Object {
       "Properties": Object {
-        "GroupDescription": "MyDynamoTestStack/MyFargateService/Service/SecurityGroup",
+        "GroupDescription": "MyDynamoTestStack/MyDynamoTestStack/MyFargateService/Service/SecurityGroup",
         "SecurityGroupEgress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
@@ -260,7 +260,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "MyFargateServiceSecurityGroupfromMyDynamoTestStackMyFargateServiceLBSecurityGroup877A69533000B53497E8": Object {
+    "MyFargateServiceSecurityGroupfromMyDynamoTestStackMyFargateServiceLBSecurityGroup8EC6E3873000379F6D46": Object {
       "Properties": Object {
         "Description": "Load balancer to target",
         "FromPort": 3000,
@@ -333,7 +333,7 @@ Object {
             "Arn",
           ],
         },
-        "Family": "MyDynamoTestStackMyFargateServiceTaskDef9AA51962",
+        "Family": "MyDynamoTestStackMyFargateServiceTaskDef6CB2CA6F",
         "Memory": "2048",
         "NetworkMode": "awsvpc",
         "RequiresCompatibilities": Array [
@@ -458,7 +458,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc",
           },
         ],
       },
@@ -469,7 +469,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc",
           },
         ],
       },
@@ -492,7 +492,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PrivateSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PrivateSubnet1",
           },
         ],
         "VpcId": Object {
@@ -535,7 +535,7 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PrivateSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PrivateSubnet1",
           },
         ],
         "VpcId": Object {
@@ -572,7 +572,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PrivateSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PrivateSubnet2",
           },
         ],
         "VpcId": Object {
@@ -604,7 +604,7 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PrivateSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PrivateSubnet2",
           },
         ],
         "VpcId": Object {
@@ -634,7 +634,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet1",
           },
         ],
       },
@@ -654,7 +654,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet1",
           },
         ],
       },
@@ -676,7 +676,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet1",
           },
         ],
         "VpcId": Object {
@@ -708,7 +708,7 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet1",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet1",
           },
         ],
         "VpcId": Object {
@@ -738,7 +738,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet2",
           },
         ],
       },
@@ -758,7 +758,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet2",
           },
         ],
       },
@@ -769,7 +769,7 @@ Object {
         "Tags": Array [
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet2",
           },
         ],
         "VpcId": Object {
@@ -812,7 +812,7 @@ Object {
           },
           Object {
             "Key": "Name",
-            "Value": "MyDynamoTestStack/MyVpc/PublicSubnet2",
+            "Value": "MyDynamoTestStack/MyDynamoTestStack/MyVpc/PublicSubnet2",
           },
         ],
         "VpcId": Object {

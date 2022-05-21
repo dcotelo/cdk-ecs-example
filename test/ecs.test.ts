@@ -1,19 +1,18 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as CaylentEcs from '../lib/ecs-stack';
+import * as Ecs from '../lib/ecs-stack';
+import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
 import '@aws-cdk/assert/jest';
 
 const app = new cdk.App();
+const ECSTestStack = new cdk.Stack(app, "MyECSTestStack");
+
 // WHEN
-const stack = new CaylentEcs.EcsStack(app, 'MyECSTestStack');
+    //create and register image
+    const myCustomImage = new DockerImageAsset(ECSTestStack, "golang-example-app", {
+      directory: 'golang-example-app/',
+    });
 
-/* test('Empty Stack', () => {
-
-  // THEN
-  expectCDK(stack).to(matchTemplate({
-    "Resources": {}
-  }, MatchStyle.EXACT))
-}); */
+const stack = new Ecs.EcsStack(ECSTestStack, 'MyECSTestStack',{dockerImageProp:myCustomImage});
 
 test('VPC', () => {
   expect(stack).toHaveResource('AWS::EC2::VPC', {
