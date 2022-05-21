@@ -1,8 +1,8 @@
 {
-  "name": "caylent-ecs",
+  "name": "ecs",
   "version": "0.1.0",
   "bin": {
-    "caylent-ecs": "bin/caylent-ecs.js"
+    "ecs": "bin/ecs.js"
   },
   "scripts": {
     "build": "tsc",
