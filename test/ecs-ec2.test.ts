@@ -9,15 +9,15 @@ enum ServiceType {
   }
 
 const app = new App();
-const ECSTestStack = new Stack(app, "MyECSTestStack");
+const ECSEC2TestStack = new Stack(app, "MyECSEC2TestStack");
 
 // WHEN
     //create and register image
-    const myCustomImage = new DockerImageAsset(ECSTestStack, "golang-example-app", {
+    const myCustomImage = new DockerImageAsset(ECSEC2TestStack, "golang-example-app", {
       directory: 'golang-example-app/',
     });
 
-const stack = new Ecs.EcsStack(ECSTestStack, 'MyECSTestStack',{dockerImageProp:myCustomImage,desiredCount:6,EcsServiceTypeProps:ServiceType.Fargate});
+const stack = new Ecs.EcsStack(ECSEC2TestStack, 'MyECSTestStack',{dockerImageProp:myCustomImage,desiredCount:6,EcsServiceTypeProps:ServiceType.EC2});
 
 test('VPC', () => {
   expect(stack).toHaveResource('AWS::EC2::VPC', {
@@ -32,16 +32,10 @@ test('Internet Access', () => {
   });
 });
 
-test('ECS-task definition', () => {
-  expect(stack).toHaveResource('AWS::ECS::TaskDefinition', {
-    Cpu: "512",
-    Memory: "2048",
-  });
-});
 
 test('ECS-Service', () => {
   expect(stack).toHaveResource("AWS::ECS::Service", {
-    LaunchType: 'FARGATE',
+    LaunchType: 'EC2',
     DesiredCount: 6,
     HealthCheckGracePeriodSeconds: 60
   });

@@ -4,6 +4,10 @@ import {App, Fn, Tags,Stack} from 'aws-cdk-lib';
 import { EcsStack } from '../lib/ecs-stack';
 import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 
+enum ServiceType {
+  Fargate,
+  EC2
+  }
 
 
 const app = new App();
@@ -32,5 +36,7 @@ new EcsStack(ECSStack, 'EcsStack', {
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
   
   dockerImageProp:myCustomImage,
-  desiredCount:6
+  desiredCount:6,
+  EcsServiceTypeProps:ServiceType.Fargate,
+
 });
