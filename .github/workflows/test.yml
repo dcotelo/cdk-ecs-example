@@ -1,4 +1,4 @@
-name: CDK test
+name: CDK build and test
 
 on:
   pull_request:

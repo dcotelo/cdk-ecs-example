@@ -6,10 +6,12 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import { Vpc } from 'aws-cdk-lib/aws-ec2';
 import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import CustomTable from './dynamodb/custom_table';
+import internal = require('stream');
 
 
 interface DockerImageProps extends StackProps {
   dockerImageProp: DockerImageAsset,
+  desiredCount:number,
 }
 
 export class EcsStack extends Stack {
@@ -32,7 +34,7 @@ export class EcsStack extends Stack {
     new ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster, // Required
       cpu: 512, // Default is 256
-      desiredCount: 6, // Default is 1
+      desiredCount: props.desiredCount, // Default is 1
       taskImageOptions: {
         //use our own image
         image: ContainerImage.fromDockerImageAsset(props.dockerImageProp),
