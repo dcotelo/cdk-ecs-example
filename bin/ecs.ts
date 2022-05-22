@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
+import {App, Fn, Tags,Stack} from 'aws-cdk-lib';
 import { EcsStack } from '../lib/ecs-stack';
-import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
+import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 
 
-const app = new cdk.App();
 
-const ECSStack = new cdk.Stack(app, "MyECSTestStack");
+const app = new App();
+
+const ECSStack = new Stack(app, "MyECSTestStack");
 
     //create and register image
     const myCustomImage = new DockerImageAsset(ECSStack, "golang-example-app", {
@@ -30,6 +31,5 @@ new EcsStack(ECSStack, 'EcsStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
   
-
   dockerImageProp:myCustomImage
 });

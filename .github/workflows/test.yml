@@ -30,16 +30,12 @@ jobs:
       - name: ls 
         run: |
           ls -l 
-          
       - name: npm install
         run: |
           npm install
-
-
       - name: npm test
         run: |
           npm test -- -u
-
       - name: cdk synth
         run: |
           npm run cdk synth
