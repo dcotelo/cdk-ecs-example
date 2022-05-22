@@ -36,9 +36,6 @@ jobs:
       - name: npm test
         run: |
           npm test -- -u
-      - name: install cdk
-        run: |
-          npm upgrade -g aws-cdk
       - name: cdk synth
         run: |
           npm run cdk synth
