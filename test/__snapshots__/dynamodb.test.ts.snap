@@ -82,6 +82,14 @@ Object {
       "Type": "AWS::SNS::Topic",
     },
     "MyCluster4C1BA579": Object {
+      "Properties": Object {
+        "ClusterSettings": Array [
+          Object {
+            "Name": "containerInsights",
+            "Value": "enabled",
+          },
+        ],
+      },
       "Type": "AWS::ECS::Cluster",
     },
     "MyFargateServiceF490C034": Object {
@@ -287,23 +295,7 @@ Object {
           Object {
             "Essential": true,
             "Image": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  Object {
-                    "Ref": "AWS::AccountId",
-                  },
-                  ".dkr.ecr.",
-                  Object {
-                    "Ref": "AWS::Region",
-                  },
-                  ".",
-                  Object {
-                    "Ref": "AWS::URLSuffix",
-                  },
-                  "/aws-cdk/assets:13207ae815e683cbce878efe37ae725a54f99e319cda8f5764bd8fda801c70dd",
-                ],
-              ],
+              "Fn::Sub": "\${AWS::AccountId}.dkr.ecr.\${AWS::Region}.\${AWS::URLSuffix}/cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}:b30a799654496292ff4c2b4de49f5c10490b05e94e9feda1b85df7775981434f",
             },
             "LogConfiguration": Object {
               "LogDriver": "awslogs",
@@ -392,7 +384,10 @@ Object {
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":repository/aws-cdk/assets",
+                    ":repository/",
+                    Object {
+                      "Fn::Sub": "cdk-hnb659fds-container-assets-\${AWS::AccountId}-\${AWS::Region}",
+                    },
                   ],
                 ],
               },

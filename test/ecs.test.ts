@@ -1,10 +1,10 @@
-import * as cdk from '@aws-cdk/core';
+import {App, Stack, Tags} from 'aws-cdk-lib';
 import * as Ecs from '../lib/ecs-stack';
-import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
+import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import '@aws-cdk/assert/jest';
 
-const app = new cdk.App();
-const ECSTestStack = new cdk.Stack(app, "MyECSTestStack");
+const app = new App();
+const ECSTestStack = new Stack(app, "MyECSTestStack");
 
 // WHEN
     //create and register image

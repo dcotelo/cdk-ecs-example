@@ -1,13 +1,13 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
-import * as cdk from '@aws-cdk/core';
+import {App,Stack} from 'aws-cdk-lib';
 import * as Ecs from '../lib/ecs-stack';
 import '@aws-cdk/assert/jest';
-import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
+import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import { SynthUtils } from '@aws-cdk/assert';
 
-const app = new cdk.App();
 
-const DynamoTestStack = new cdk.Stack(app, "MyDynamoTestStack");
+const app = new App();
+
+const DynamoTestStack = new Stack(app, "MyDynamoTestStack");
 
 // WHEN
 const myCustomImage = new DockerImageAsset(DynamoTestStack, "golang-example-app", {

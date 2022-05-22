@@ -1,14 +1,16 @@
-import * as cdk from '@aws-cdk/core';
-import * as dynamodb from '@aws-cdk/aws-dynamodb';
-import { StreamViewType } from '@aws-cdk/aws-dynamodb';
-import * as sns from '@aws-cdk/aws-sns';
+import {Tags,RemovalPolicy,TagManager,CfnOutput} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+
+import { BillingMode,Table,StreamViewType,AttributeType } from 'aws-cdk-lib/aws-dynamodb';
+import { Topic } from 'aws-cdk-lib/aws-sns';
+
 
 export interface DynamoOptions {
     /**
      * DynamoDB's Read/Write capacity modes.
      * {@link BillingMode}
      */
-    readonly billingMode?: dynamodb.BillingMode;
+    readonly billingMode?: BillingMode;
 
     /**
      * The default removal policy is RETAIN, which means that cdk destroy will not attempt to delete
@@ -16,7 +18,7 @@ export interface DynamoOptions {
      * the policy to DESTROY, cdk destroy will delete the table (even if it has data in it)
      * {@link RemovalPolicy}
      */
-    readonly removalPolicy?: cdk.RemovalPolicy;
+    readonly removalPolicy?: RemovalPolicy;
 }
 
 /**
@@ -25,15 +27,15 @@ export interface DynamoOptions {
  * Use {@link DynamoOptions} for all table properties
  * @link cdk.Construct
  */
-export default class CustomTable extends cdk.Construct {
+export default class CustomTable extends Construct {
     //class variables
     options: DynamoOptions;
     name: string;
-    readonly Table: dynamodb.Table;
-    readonly Topic: sns.Topic;
+    readonly Table: Table;
+    readonly Topic: Topic;
     backupPlan: string;
 
-    tags: cdk.TagManager;
+    tags: TagManager;
     /**
    * @param scope CDK class, it's used to build 
    * @param id Id of the cloudformation stack
@@ -42,11 +44,11 @@ export default class CustomTable extends cdk.Construct {
    * @method constructor Create the classes for constructors
    * 
   */
-    constructor(scope: cdk.Construct, id: string, options: DynamoOptions = {
+    constructor(scope: Construct, id: string, options: DynamoOptions = {
         //default value for billing is pay per request
-        billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+        billingMode: BillingMode.PAY_PER_REQUEST,
         //default value for removal policy is retain
-        removalPolicy: cdk.RemovalPolicy.RETAIN
+        removalPolicy: RemovalPolicy.RETAIN
     }, prefix: string, backupPlan: string) {
         super(scope, id);
         this.options = options;
@@ -55,15 +57,15 @@ export default class CustomTable extends cdk.Construct {
         this.backupPlan = backupPlan;
 
         //sns 
-        this.Topic = new sns.Topic(this, 'Topic', {
+        this.Topic = new Topic(this, 'Topic', {
             displayName: this.name + `_TOPIC`
         });
 
-        this.Table = new dynamodb.Table(scope, this.name, {
+        this.Table = new Table(scope, this.name, {
             // It's default but it was used to show the config
             partitionKey: {
                 name: 'MY_CUSTOM_TABLE_ID',
-                type: dynamodb.AttributeType.STRING
+                type: AttributeType.STRING
             },
             stream: StreamViewType.NEW_AND_OLD_IMAGES,
             tableName: this.name,
@@ -72,10 +74,10 @@ export default class CustomTable extends cdk.Construct {
             billingMode: options.billingMode
         });
 
-        cdk.Tags.of(this).add('backup-plan', this.backupPlan);
+        Tags.of(this).add('backup-plan', this.backupPlan);
 
-        new cdk.CfnOutput(this, 'Table-ARN', { value: this.Table.tableArn });
-        new cdk.CfnOutput(this, 'Topic-ARN', { value: this.Topic.topicArn });
+        new CfnOutput(this, 'Table-ARN', { value: this.Table.tableArn });
+        new CfnOutput(this, 'Topic-ARN', { value: this.Topic.topicArn });
 
     }
 }

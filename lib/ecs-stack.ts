@@ -1,26 +1,27 @@
-import * as cdk from '@aws-cdk/core';
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
-import { DockerImageAsset } from "@aws-cdk/aws-ecr-assets";
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
+import { Construct } from 'constructs';
+import {Stack,StackProps,RemovalPolicy} from 'aws-cdk-lib';
+import { Cluster,ContainerImage } from 'aws-cdk-lib/aws-ecs';
+import { ApplicationLoadBalancedFargateService, } from 'aws-cdk-lib/aws-ecs-patterns';
+import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
+import { Vpc } from 'aws-cdk-lib/aws-ec2';
+import { BillingMode } from 'aws-cdk-lib/aws-dynamodb';
 import CustomTable from './dynamodb/custom_table';
 
 
-interface DockerImageProps extends cdk.StackProps {
+interface DockerImageProps extends StackProps {
   dockerImageProp: DockerImageAsset,
 }
 
-export class EcsStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props: DockerImageProps) {
+export class EcsStack extends Stack {
+  constructor(scope: Construct, id: string, props: DockerImageProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
-    const vpc = new ec2.Vpc(this, "MyVpc", {
+    const vpc = new Vpc(this, "MyVpc", {
       maxAzs: 3 // Default is all AZs in region
     });
 
-    const cluster = new ecs.Cluster(this, "MyCluster", {
+    const cluster = new Cluster(this, "MyCluster", {
       vpc: vpc,
       //enable container insights for better observability 
       containerInsights:true
@@ -28,13 +29,13 @@ export class EcsStack extends cdk.Stack {
 
 
     // Create a load-balanced Fargate service and make it public
-    new ecs_patterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
+    new ApplicationLoadBalancedFargateService(this, "MyFargateService", {
       cluster: cluster, // Required
       cpu: 512, // Default is 256
       desiredCount: 6, // Default is 1
       taskImageOptions: {
         //use our own image
-        image: ecs.ContainerImage.fromDockerImageAsset(props.dockerImageProp),
+        image: ContainerImage.fromDockerImageAsset(props.dockerImageProp),
         containerPort: 3000,
       },
       memoryLimitMiB: 2048, // Default is 512
@@ -46,8 +47,8 @@ export class EcsStack extends cdk.Stack {
     const backupTag: string = "myBackupPlan"; // add table to a tag based backup plan
 
     const custom_table: CustomTable = new CustomTable(this, 'MY_CUSTOM_TABLE', {
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST
+      removalPolicy: RemovalPolicy.DESTROY,
+      billingMode: BillingMode.PAY_PER_REQUEST
     }, prefix, backupTag);
 
 
