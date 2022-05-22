@@ -42,4 +42,4 @@ jobs:
 
       - name: cdk synth
         run: |
-          npm run cdk synth
+          cdk synth
