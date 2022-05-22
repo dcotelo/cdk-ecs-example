@@ -12,7 +12,7 @@ const ECSTestStack = new Stack(app, "MyECSTestStack");
       directory: 'golang-example-app/',
     });
 
-const stack = new Ecs.EcsStack(ECSTestStack, 'MyECSTestStack',{dockerImageProp:myCustomImage});
+const stack = new Ecs.EcsStack(ECSTestStack, 'MyECSTestStack',{dockerImageProp:myCustomImage,desiredCount:6});
 
 test('VPC', () => {
   expect(stack).toHaveResource('AWS::EC2::VPC', {

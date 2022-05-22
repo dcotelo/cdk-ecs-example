@@ -31,5 +31,6 @@ new EcsStack(ECSStack, 'EcsStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
   
-  dockerImageProp:myCustomImage
+  dockerImageProp:myCustomImage,
+  desiredCount:6
 });

@@ -13,7 +13,7 @@ const DynamoTestStack = new Stack(app, "MyDynamoTestStack");
 const myCustomImage = new DockerImageAsset(DynamoTestStack, "golang-example-app", {
     directory: 'golang-example-app/',
   });
-const stack = new Ecs.EcsStack(DynamoTestStack, 'MyDynamoTestStack',{dockerImageProp:myCustomImage});
+const stack = new Ecs.EcsStack(DynamoTestStack, 'MyDynamoTestStack',{dockerImageProp:myCustomImage,desiredCount:6});
 
 test('DynamoDB - Snapshot', () => {
     expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
